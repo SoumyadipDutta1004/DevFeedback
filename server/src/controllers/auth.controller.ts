@@ -31,10 +31,10 @@ async function register(
       password: hashedPassword,
     });
 
-    return res.status(201).json({ message: "User created successfully" });
+    res.status(201).json({ message: "User created successfully" });
   } catch (error) {
     console.log(`error in register controller ${error}`);
-    next(error);
+    res.status(500).json({ message: "Internal server error" });
   }
 }
 
@@ -77,7 +77,7 @@ async function login(
       }
     );
 
-    return res
+    res
       .status(201)
       .cookie("token", token, {
         httpOnly: true,
@@ -86,9 +86,10 @@ async function login(
         maxAge: 1000 * 60 * 60 * 24 * 7,
       })
       .json({ message: "Logged in successfully" });
+
   } catch (error) {
     console.log(`error in login controller ${error}`);
-    next(error);
+    res.status(500).json({ message: "Internal server error" });
   }
 }
 

@@ -6,6 +6,7 @@ import { PORT } from "./config/env";
 import connectDB from "./database/mongoDB";
 
 import authRoute from "./routes/auth.route";
+import authMiddleware from "./middlewares/auth.middleware";
 
 const app = express();
 
@@ -17,6 +18,10 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use("/api/auth", authRoute);
+
+app.get("/", authMiddleware, (req, res) => {
+  res.send("Hello World!");
+});
 
 (async function () {
   await connectDB();
