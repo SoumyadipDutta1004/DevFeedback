@@ -85,7 +85,7 @@ async function login(
         sameSite: "strict",
         maxAge: 1000 * 60 * 60 * 24 * 7,
       })
-      .json({ message: "User created successfully" });
+      .json({ message: "Logged in successfully" });
   } catch (error) {
     console.log(`error in login controller ${error}`);
     next(error);
